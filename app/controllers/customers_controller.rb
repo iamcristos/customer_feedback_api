@@ -35,15 +35,12 @@ class CustomersController < ApplicationController
       end
   end
 
-  def login
-    @customer = Customer.fi
-
   # PATCH/PUT /customers/1
   # PATCH/PUT /customers/1.json
   def update
 
     if @customer.update(customer_params)
-      render json: @customer status: :ok, location: @customer 
+      render json: @customer, status: :ok, location: @customer 
     else
       render json: @customer.errors, status: :unprocessable_entity 
     end

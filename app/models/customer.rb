@@ -1,8 +1,7 @@
 class Customer
   include Mongoid::Document
   include Mongoid::Timestamps
-
-  has_secure_password
+  include ActiveModel::SecurePassword
 
   validates :password, length: { minimum: 8, maximum: 16 }
   validates :password, confirmation: true
@@ -11,6 +10,8 @@ class Customer
 
 
   field :email, type: String
-  field :password, type: String
+  field :password_digest, type: String
   field :description, type: String 
+
+  has_secure_password
 end
