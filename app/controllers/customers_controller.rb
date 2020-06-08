@@ -34,6 +34,9 @@ class CustomersController < ApplicationController
       end
   end
 
+  def login
+    @customer = Customer.fi
+
   # PATCH/PUT /customers/1
   # PATCH/PUT /customers/1.json
   def update
