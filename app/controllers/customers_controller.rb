@@ -39,7 +39,7 @@ class CustomersController < ApplicationController
   def update
 
     if @customer.update(customer_params)
-      render :show, status: :ok, location: @customer 
+      render json: @customer status: :ok, location: @customer 
     else
       render json: @customer.errors, status: :unprocessable_entity 
     end
@@ -50,10 +50,6 @@ class CustomersController < ApplicationController
   def destroy
     @customer.destroy
     render json: @customer,  message: 'Customer was successfully destroyed.'
-    # respond_to do |format|
-    #   format.html { redirect_to customers_url, notice: 'Customer was successfully destroyed.' }
-    #   format.json { head :no_content }
-    # end
   end
 
   private
