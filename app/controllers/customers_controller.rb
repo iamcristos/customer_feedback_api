@@ -1,4 +1,5 @@
 class CustomersController < ApplicationController
+  before_action :authorize_request, except: :create
   before_action :set_customer, only: [:show, :update, :destroy]
 
   # GET /customers
