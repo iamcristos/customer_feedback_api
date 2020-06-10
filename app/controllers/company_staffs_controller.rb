@@ -10,6 +10,8 @@ class CompanyStaffsController < ApplicationController
   # GET /company_staffs/1
   # GET /company_staffs/1.json
   def show
+
+    render json: @company_staff
   end
 
   # POST /company_staffs
@@ -34,6 +36,14 @@ class CompanyStaffsController < ApplicationController
     end
   end
 
+  # confirm staff member
+
+  def company_staffs
+    @staffs = CompanyStaff.confirm(params[:id])
+    render json: @staffs, status: :ok
+  end
+  
+
   # DELETE /company_staffs/1
   # DELETE /company_staffs/1.json
   def destroy
@@ -48,6 +58,7 @@ class CompanyStaffsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def company_staff_params
-      params.fetch(:company_staff, {})
+      params.fetch(:company_staff, {}).permit(:email, :password, :full_name, :customer_id)
     end
+    
 end

@@ -19,5 +19,8 @@ class CompanyStaff
 
   has_secure_password
 
+  scope :customer, -> (customer_id){ where(:customer_id => customer_id)}
+  scope :active, -> {where(:active => true)}
+
   belongs_to :customers, foreign_key: "customer_id"
 end
