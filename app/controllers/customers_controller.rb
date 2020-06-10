@@ -35,6 +35,13 @@ class CustomersController < ApplicationController
       end
   end
 
+  def staffs
+  
+    @staffs = Customer.find(params[:id])
+
+    render json: @staffs.company_staffs, status: :ok
+  end
+
   # PATCH/PUT /customers/1
   # PATCH/PUT /customers/1.json
   def update
