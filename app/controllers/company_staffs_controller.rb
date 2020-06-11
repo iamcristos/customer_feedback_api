@@ -1,5 +1,5 @@
 class CompanyStaffsController < ApplicationController
-  before_action :set_company_staff, only: [:show, :update, :destroy]
+  before_action :set_company_staff, only: [:show, :update, :destroy, :approve]
 
   # GET /company_staffs
   # GET /company_staffs.json
@@ -25,6 +25,19 @@ class CompanyStaffsController < ApplicationController
       render json: @company_staff.errors, status: :unprocessable_entity
     end
   end
+
+  # Approve company staff
+
+  def approve
+    # @company_staff.approved = true
+    puts(json: @company_staff, :msg => 'hhdhhjekjeiidkk')
+    if @company_staff.update_attributes(:approved => true)
+      render json: @company_staff, status: :ok, :message => 'Staff approved sucessfully'
+    else
+      render json: @company_staff.errors, :error => 'no such staff'
+    end
+  end
+
 
   # PATCH/PUT /company_staffs/1
   # PATCH/PUT /company_staffs/1.json

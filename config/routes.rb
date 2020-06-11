@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :company_staffs
+  resources :company_staffs do
+    member do
+      patch :approve
+    end
+  end
   
   
   resources :customers do
