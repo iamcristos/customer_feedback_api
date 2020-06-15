@@ -14,6 +14,19 @@ class AuthenticationController < ApplicationController
         end
     end
 
+    def customer_staff_login
+        @staff = CompanyStaff.find_by(:email => params[:email])
+
+        if @staff&.authenticate(params[:password])
+            token = JsonWebToken.encode(user_id: @staff.id)
+            time = Time.now + 24.hours.to_i
+            render json: {token: token, exp: time.strftime("%m-%d-%Y %H:%M"), email: @customer.email, id: @customer.id}, status: :ok
+        else
+            render json: {error: 'unathorized'}, status: :unathorized
+        end
+    end
+    
+
     private
 
     def login_params
