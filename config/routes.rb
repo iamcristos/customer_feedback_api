@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   post '/auth/login', to: 'authentication#customer_login'
+  post '/auth/staff/login', to: 'authentication#customer_staff_login'
   # get '/customers/get_staffs', to: 'customers#get_staffs'
 end

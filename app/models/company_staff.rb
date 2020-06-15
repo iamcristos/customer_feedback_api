@@ -10,7 +10,7 @@ class CompanyStaff
   #Ex:- :default =>''
   field :customer_id, type: String 
 
-  validates :password, length: { minimum: 8, maximum: 16 }
+  # validates :password, length: { minimum: 8, maximum: 16 }
   validates :password, confirmation: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP } 
   validates :email, presence: true, uniqueness: true

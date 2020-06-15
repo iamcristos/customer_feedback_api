@@ -1,7 +1,7 @@
 class CompanyStaffsController < ApplicationController
   before_action :set_company_staff, only: [:show, :update, :destroy, :approve]
   before_action :authorize_request, except: :create
-  before_action :authorize_user, only: [:approve]
+  before_action :admin_auth, only: [:approve]
 
   # GET /company_staffs
   # GET /company_staffs.json
