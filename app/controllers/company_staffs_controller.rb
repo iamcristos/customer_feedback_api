@@ -1,5 +1,7 @@
 class CompanyStaffsController < ApplicationController
   before_action :set_company_staff, only: [:show, :update, :destroy, :approve]
+  before_action :authorize_request, except: :create
+  before_action :authorize_user, only: [:approve]
 
   # GET /company_staffs
   # GET /company_staffs.json
@@ -29,8 +31,8 @@ class CompanyStaffsController < ApplicationController
   # Approve company staff
 
   def approve
-    # @company_staff.approved = true
-    puts(json: @company_staff, :msg => 'hhdhhjekjeiidkk')
+    # # @company_staff.approved = true
+    # puts(json: @company_staff, :msg => 'hhdhhjekjeiidkk')
     if @company_staff.update_attributes(:approved => true)
       render json: @company_staff, status: :ok, :message => 'Staff approved sucessfully'
     else

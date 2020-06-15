@@ -6,7 +6,19 @@ class ApplicationController < ActionController::API
     end
 
     def authorize_request
-        
+       return authorize_user
+    end
+    
+    def admin_auth
+        authorize_user
+        if !@current_user.admin
+            render json: { errors: 'unauthorized action'}, status: :unauthorized
+        end
+    end
+
+    private
+
+    def authorize_user
         header = request.headers['Authorization']
         header = header.split(' ').last if header
 
@@ -23,6 +35,5 @@ class ApplicationController < ActionController::API
             render json: {errors: 'token required'}, status: :unauthorized
         end
     end
-    
     
 end

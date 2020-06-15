@@ -11,7 +11,8 @@ class Customer
 
   field :email, type: String
   field :password_digest, type: String
-  field :description, type: String 
+  field :description, type: String
+  field :admin, type: Boolean, default: true
 
   has_secure_password
 
