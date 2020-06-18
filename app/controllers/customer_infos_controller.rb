@@ -1,5 +1,9 @@
 class CustomerInfosController < ApplicationController
 
+    def index
+        @customer_infos = CustomerInfo.all
+        render json: @customer_infos, status: :ok
+    end
     def create
         @customer_info = CustomerInfo.new(customer_info_params)
 

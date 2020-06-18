@@ -7,12 +7,12 @@ class CompanyStaffsController < ApplicationController
   # GET /company_staffs.json
   def index
     @company_staffs = CompanyStaff.all
+    render json: @company_staffs, status: :ok
   end
 
   # GET /company_staffs/1
   # GET /company_staffs/1.json
   def show
-
     render json: @company_staff.customers
   end
 
