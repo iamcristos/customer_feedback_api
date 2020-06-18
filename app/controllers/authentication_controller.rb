@@ -3,7 +3,6 @@ class AuthenticationController < ApplicationController
 
     def customer_login
         @customer = Customer.find_by(:email => params[:email])
-        puts('dhyhbdhfdhhfdjfh', @customer.to_s)
         
         if @customer&.authenticate(params[:password])
             token = JsonWebToken.encode(user_id: @customer.id)
