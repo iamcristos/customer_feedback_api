@@ -1,5 +1,5 @@
 class AuthenticationController < ApplicationController
-    before_action :authorize_request, except: :customer_login
+    before_action :authorize_request, except: [:customer_login, :customer_staff_login]
 
     def customer_login
         @customer = Customer.find_by(:email => params[:email])
@@ -9,7 +9,7 @@ class AuthenticationController < ApplicationController
             time = Time.now + 24.hours.to_i
             render json: {token: token, exp: time.strftime("%m-%d-%Y %H:%M"), email: @customer.email, id: @customer.id}, status: :ok
         else
-            render json: {error: 'unathorized'}, status: :unathorized
+            render json: {:error => 'unathorized'}, status: :unauthorized
         end
     end
 
@@ -19,9 +19,9 @@ class AuthenticationController < ApplicationController
         if @staff&.authenticate(params[:password])
             token = JsonWebToken.encode(user_id: @staff.id)
             time = Time.now + 24.hours.to_i
-            render json: {token: token, exp: time.strftime("%m-%d-%Y %H:%M"), email: @customer.email, id: @customer.id}, status: :ok
+            render json: {token: token, exp: time.strftime("%m-%d-%Y %H:%M"), email: @staff.email, id: @staff.id}, status: :ok
         else
-            render json: {error: 'unathorized'}, status: :unathorized
+            render json: {error: 'unathorized'}, status: :unauthorized
         end
     end
     
