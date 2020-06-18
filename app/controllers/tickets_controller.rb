@@ -20,5 +20,12 @@ class TicketsController < ApplicationController
         if @ticket.update_attributes(:closed => true)
             render json: @ticket, status: :ok, :message => 'ticket closed succesfully'
     end
+
+    private
+
+        def set_ticket
+            @ticket = Ticket.find(params[:id])
+        end
+        
     
 end
