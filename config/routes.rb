@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tickets
   resources :customer_infos
   resources :company_staffs do
     member do
